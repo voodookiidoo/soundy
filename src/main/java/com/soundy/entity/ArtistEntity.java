@@ -5,12 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SecondaryTable;
-import jakarta.persistence.SecondaryTables;
+import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+
+import java.util.List;
 
 @Entity(name = "artist")
 //@SecondaryTables({
@@ -19,7 +20,6 @@ import lombok.experimental.Accessors;
 //})
 @Getter
 @Setter
-@ToString
 @Accessors(chain = true)
 public class ArtistEntity {
     @Id
@@ -27,5 +27,13 @@ public class ArtistEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name="name")
+    private String name;
+
+    @Column(name = "description")
+    private String desc;
+
+    @ManyToMany(mappedBy = "artists")
+    private List<AppUserEntity> subs;
 
 }
