@@ -1,13 +1,15 @@
 # Compiled class file
 *.class
 .idea
-.mvn
 .gitignore
 HELP.md
 
+.DS_STORE
+target
 # Log file
 *.log
-
+*.http
+tester.http
 # BlueJ files
 *.ctxt
 
