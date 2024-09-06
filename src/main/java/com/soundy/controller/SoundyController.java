@@ -1,6 +1,7 @@
 package com.soundy.controller;
 
 import com.soundy.dto.artist.AddArtistReq;
+import com.soundy.dto.track.PublishTrackReq;
 import com.soundy.dto.user.AddUserReq;
 import com.soundy.service.ArtistService;
 import com.soundy.service.PlaylistService;
@@ -29,17 +30,27 @@ public class SoundyController {
     UserService userService;
 
     @PostMapping("/usr")
-    public ResponseEntity<?> userHandler(@RequestBody AddUserReq req) {
+    public ResponseEntity<?> createUser(@RequestBody AddUserReq req) {
         userService.createUser(req);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/artist")
-    public ResponseEntity<?> artistHandler(@RequestBody AddArtistReq req) {
+    public ResponseEntity<?> createArtist(@RequestBody AddArtistReq req) {
         artistService.createArtist(req);
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/playlist")
+    public ResponseEntity<?> createPlaylist(@RequestBody AddArtistReq req) {
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/track")
+    public ResponseEntity<?> publishTrack(@RequestBody PublishTrackReq req) {
+        trackService.publishTrack(req);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

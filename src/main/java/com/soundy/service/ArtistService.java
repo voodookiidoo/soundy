@@ -7,6 +7,9 @@ import com.soundy.repository.ArtistRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 @AllArgsConstructor
 public class ArtistService {
@@ -15,7 +18,12 @@ public class ArtistService {
 
     public void createArtist(AddArtistReq req) {
         Artist artist = SoundyMapper.INSTANCE.toArtist(req);
+
         artistRepository.save(artist);
+    }
+
+    public List<Artist> findArtistsById(Set<Integer> id){
+        return artistRepository.findAllById(id);
     }
 
 }

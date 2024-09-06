@@ -5,11 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.LinkedHashSet;
@@ -17,8 +17,10 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "artist")
+@Entity(name = "artist")
+@Table
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"tracks"})
 public class Artist {
 
     @Id
@@ -31,20 +33,15 @@ public class Artist {
     @Column(name = "description", length = Integer.MAX_VALUE)
     private String description;
 
-    @ManyToMany
-    @JoinTable(name = "user2artist",
-            joinColumns = @JoinColumn(name = "artist_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<AppUser> appUsers = new LinkedHashSet<>();
+    @ManyToMany(mappedBy = "artists")
+    private Set<Track> tracks = new LinkedHashSet<>();
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Artist{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", desc='").append(description).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
+
+//    @ManyToMany()
+//    @JoinTable(name = "user2artist",
+//            joinColumns = {@JoinColumn(name = "artist_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+//    private Set<AppUser> appUsers = new LinkedHashSet<>();
+
 
 }

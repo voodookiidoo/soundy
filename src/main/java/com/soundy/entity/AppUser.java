@@ -9,7 +9,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.LinkedHashSet;
@@ -19,6 +21,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "app_user")
+@NoArgsConstructor
 public class AppUser {
 
     @Id
@@ -39,16 +42,5 @@ public class AppUser {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "artist_id"))
     private Set<Artist> artists = new LinkedHashSet<>();
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("AppUser{");
-        sb.append("id=").append(id);
-        sb.append(", permium=").append(permium);
-        sb.append(", explicit=").append(explicit);
-        sb.append(", username='").append(username).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 
 }

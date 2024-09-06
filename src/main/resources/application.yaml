@@ -8,11 +8,11 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     show-sql: true
 server:
   port: 4840
 logging:
   pattern:
     dateformat:
-      MM/dd HH:mm:ss
+      HH:mm:ss
