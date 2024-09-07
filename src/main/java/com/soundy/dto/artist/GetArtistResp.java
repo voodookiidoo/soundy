@@ -35,7 +35,7 @@ public class GetArtistResp {
         @JsonProperty
         private Integer id;
 
-        @JsonProperty()
+        @JsonProperty
         private String name;
 
     }

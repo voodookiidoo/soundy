@@ -41,6 +41,13 @@ public class SoundyController {
         return ResponseEntity.noContent().build();
     }
 
+
+    @GetMapping("/load")
+    public ResponseEntity<?> loadDbFromFile() {
+        return artistService.loadDbFromFile() ? ResponseEntity.noContent().build() : ResponseEntity.internalServerError().build();
+    }
+
+
     @GetMapping("/artist")
     public ResponseEntity<?> getArtist(@RequestBody GetArtistReq req) {
         Optional<GetArtistResp> opt = artistService.findArtistById(req)
