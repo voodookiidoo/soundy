@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Getter
@@ -49,10 +50,6 @@ public class Track {
     )
     private Set<Artist> artists = new HashSet<>();
 
-//    @ManyToMany()
-//    @JoinTable(name = "playlist2track",
-//            joinColumns = @JoinColumn(name = "track_id"),
-//            inverseJoinColumns = @JoinColumn(name = "playlist_id"))
-//    private Set<Playlist> playlists = new LinkedHashSet<>();
+
 
 }

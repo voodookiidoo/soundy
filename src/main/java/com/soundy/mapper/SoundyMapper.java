@@ -1,6 +1,7 @@
 package com.soundy.mapper;
 
 import com.soundy.dto.artist.AddArtistReq;
+import com.soundy.dto.artist.GetArtistResp;
 import com.soundy.dto.track.PublishTrackReq;
 import com.soundy.dto.user.AddUserReq;
 import com.soundy.entity.AppUser;
@@ -22,15 +23,21 @@ public interface SoundyMapper {
     @Mapping(target = "username", source = "name")
     AppUser toAppUser(AddUserReq dto);
 
+    @Mapping(target = "tracks", ignore = true)
+    @Mapping(target = "subAmount", ignore = true)
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "appUsers", ignore = true)
     @Mapping(target = "description", source = "desc")
     Artist toArtist(AddArtistReq dto);
 
 
-    @Mapping(target = "playlists", ignore = true)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "artists", ignore = true)
     Track toTrack(PublishTrackReq dto);
+
+
+    GetArtistResp toArtistResp(Artist entity);
+
+    @Mapping(target = "name", source = "title")
+    GetArtistResp.ArtistTrackResp toArtistTrackResp(Track entity);
 
 }

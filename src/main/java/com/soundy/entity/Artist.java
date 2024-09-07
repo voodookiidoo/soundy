@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -35,6 +36,10 @@ public class Artist {
 
     @ManyToMany(mappedBy = "artists")
     private Set<Track> tracks = new LinkedHashSet<>();
+
+
+    @Formula("(select count(user2artist.user_id) from user2artist where user2artist.artist_id = id)")
+    private Integer subAmount;
 
 
 //    @ManyToMany()
