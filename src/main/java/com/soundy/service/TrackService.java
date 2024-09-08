@@ -19,6 +19,7 @@ public class TrackService {
 
     private ArtistService artistService;
 
+
     public void publishTrack(PublishTrackReq req) {
         List<Artist> artists = artistService.findArtistsById(req.getArtists());
         Track track = SoundyMapper.INSTANCE.toTrack(req);

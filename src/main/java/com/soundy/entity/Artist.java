@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.Formula;
 
 import java.util.LinkedHashSet;
@@ -22,6 +23,7 @@ import java.util.Set;
 @Table
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"tracks"})
+@Accessors(chain = true)
 public class Artist {
 
     @Id

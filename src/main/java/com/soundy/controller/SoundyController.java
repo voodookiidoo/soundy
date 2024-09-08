@@ -44,7 +44,7 @@ public class SoundyController {
 
     @GetMapping("/load")
     public ResponseEntity<?> loadDbFromFile() {
-        return artistService.loadDbFromFile() ? ResponseEntity.noContent().build() : ResponseEntity.internalServerError().build();
+        return artistService.fillDbFromFile() ? ResponseEntity.noContent().build() : ResponseEntity.internalServerError().build();
     }
 
 

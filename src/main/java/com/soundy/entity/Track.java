@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -24,6 +25,7 @@ import java.util.Set;
 @Entity(name = "track")
 @Table
 @NoArgsConstructor
+@Accessors(chain = true)
 @EqualsAndHashCode(exclude = {"artists"})
 public class Track {
 
