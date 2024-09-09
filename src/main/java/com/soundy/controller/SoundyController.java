@@ -3,6 +3,8 @@ package com.soundy.controller;
 import com.soundy.dto.artist.AddArtistReq;
 import com.soundy.dto.artist.GetArtistReq;
 import com.soundy.dto.artist.GetArtistResp;
+import com.soundy.dto.playlist.GetPlayListResp;
+import com.soundy.dto.playlist.GetPlaylistReq;
 import com.soundy.dto.track.PublishTrackReq;
 import com.soundy.dto.user.AddUserReq;
 import com.soundy.mapper.SoundyMapper;
@@ -60,6 +62,12 @@ public class SoundyController {
     public ResponseEntity<?> createArtist(@RequestBody AddArtistReq req) {
         artistService.createArtist(req);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/playlist")
+    public ResponseEntity<?> getPlaylist(@RequestBody GetPlaylistReq req) {
+        Optional<GetPlayListResp> opt = playlistService.findPlaylist(req);
+        return ResponseEntity.of(opt);
     }
 
     @PostMapping("/playlist")

@@ -16,18 +16,14 @@ import java.util.Set;
 @Accessors(chain = true)
 public class PublishTrackReq {
 
-    @JsonProperty
     @NotEmpty
     @Size(max = 255)
     private String title;
 
-    @JsonProperty
     private Boolean explicit = true;
 
-    @JsonProperty
     private Boolean premium = false;
 
-    @JsonProperty
     @NotEmpty
     private Set<Integer> artists;
 
