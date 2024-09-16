@@ -10,14 +10,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Getter
@@ -27,6 +28,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Accessors(chain = true)
 @EqualsAndHashCode(exclude = {"artists"})
+@ToString
 public class Track {
 
 
@@ -39,19 +41,20 @@ public class Track {
     private String title;
 
     @Column(name = "explicit")
-    private Boolean explicit;
+    private Boolean explicit = true;
 
     @Column(name = "premium")
-    private Boolean premium;
+    private Boolean premium = false;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JoinTable(
             name = "artist2track", // Название промежуточной таблицы
             joinColumns = @JoinColumn(name = "track_id"), // Связь с таблицей track
             inverseJoinColumns = @JoinColumn(name = "artist_id") // Связь с таблицей artist
     )
+    @ToString.Exclude
+    @Size(min = 1)
     private Set<Artist> artists = new HashSet<>();
-
 
 
 }

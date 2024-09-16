@@ -50,4 +50,10 @@ public class AppUser {
             inverseJoinColumns = @JoinColumn(name = "playlist_id"))
     private Set<Playlist> playlists;
 
+    @ManyToMany
+    @JoinTable(name = "playlist2user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+    private Set<Playlist> subPlaylists;
+
 }

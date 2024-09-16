@@ -36,7 +36,6 @@ public class ArtistService {
 
     public Artist createArtist(AddArtistReq req) {
         Artist artist = SoundyMapper.INSTANCE.toArtist(req);
-
         return artistRepository.save(artist);
     }
 

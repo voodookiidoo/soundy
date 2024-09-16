@@ -1,5 +1,6 @@
 package com.soundy.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,9 +12,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.Formula;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -24,6 +26,7 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"tracks"})
 @Accessors(chain = true)
+@ToString
 public class Artist {
 
     @Id
@@ -36,19 +39,13 @@ public class Artist {
     @Column(name = "description", length = Integer.MAX_VALUE)
     private String description;
 
-    @ManyToMany(mappedBy = "artists")
-    private Set<Track> tracks = new LinkedHashSet<>();
+    @ManyToMany(mappedBy = "artists", cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @ToString.Exclude
+    private Set<Track> tracks = new HashSet<>();
 
 
-    @Formula("(select count(user2artist.user_id) from user2artist where user2artist.artist_id = id)")
-    private Integer subAmount;
-
-
-//    @ManyToMany()
-//    @JoinTable(name = "user2artist",
-//            joinColumns = {@JoinColumn(name = "artist_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "user_id")})
-//    private Set<AppUser> appUsers = new LinkedHashSet<>();
+//    @Formula("(select count(user2artist.user_id) from user2artist where user2artist.artist_id = id)")
+//    private Integer subAmount;
 
 
 }

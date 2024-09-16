@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @AllArgsConstructor
-@Controller
+@Controller()
 @RequestMapping("/soundy")
-public class SoundyController {
+public class UserController {
 
 }

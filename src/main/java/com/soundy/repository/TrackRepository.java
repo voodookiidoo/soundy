@@ -9,10 +9,7 @@ import java.util.List;
 @Repository
 public interface TrackRepository extends JpaRepository<Track, Integer> {
 
-    @Override
-    <S extends Track> S save(S entity);
+    long removeById(Integer id);
 
-    @Override
-    <S extends Track> List<S> saveAll(Iterable<S> entities);
 
 }
