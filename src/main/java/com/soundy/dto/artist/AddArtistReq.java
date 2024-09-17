@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @ToString
-@Accessors(chain = true)
+
 public class AddArtistReq {
 
     @JsonProperty

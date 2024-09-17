@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+
+public class UserService  {
 
     AppUserRepository userRepository;
 

@@ -25,7 +25,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "playlist")
-@Accessors(chain = true)
+
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode

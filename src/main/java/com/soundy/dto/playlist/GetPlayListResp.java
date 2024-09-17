@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-@Accessors(chain = true)
+
 public class GetPlayListResp {
 
     private Integer id;

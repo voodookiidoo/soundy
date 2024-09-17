@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Accessors(chain = true)
+
 @Service
 public class TrackResp {
 

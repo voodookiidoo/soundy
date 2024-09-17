@@ -12,7 +12,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Accessors(chain = true)
 public class UserAddPlaylistReq {
 
     @JsonProperty("user_id")

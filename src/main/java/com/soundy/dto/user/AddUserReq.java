@@ -7,7 +7,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 @ToString
-@Accessors(chain = true)
+
 @Getter
 @Setter
 public class AddUserReq {

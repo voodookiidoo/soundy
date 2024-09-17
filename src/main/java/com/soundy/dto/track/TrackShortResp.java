@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@Accessors(chain = true)
+
 @NoArgsConstructor
 public class TrackShortResp {
 

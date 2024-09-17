@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @NoArgsConstructor
-@Accessors(chain = true)
+
 public class UserRemovePlaylistReq {
 
     @JsonProperty("user_id")

@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Accessors(chain = true)
+
 @NoArgsConstructor
 public class CreatePlaylistReq {
 

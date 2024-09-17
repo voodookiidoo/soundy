@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-@Accessors(chain = true)
+
 public class PublishTrackReq {
 
     @NotEmpty

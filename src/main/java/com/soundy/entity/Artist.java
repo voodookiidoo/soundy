@@ -25,7 +25,7 @@ import java.util.Set;
 @Table
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"tracks"})
-@Accessors(chain = true)
+
 @ToString
 public class Artist {
 
