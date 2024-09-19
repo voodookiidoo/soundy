@@ -1,10 +1,10 @@
 package com.soundy.repository;
 
-import com.soundy.entity.Playlist;
+import com.soundy.entity.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PlaylistRepository extends JpaRepository<Playlist, Integer> {
+public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
 }

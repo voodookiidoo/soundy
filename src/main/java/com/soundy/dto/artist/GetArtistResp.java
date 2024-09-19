@@ -1,6 +1,5 @@
 package com.soundy.dto.artist;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.soundy.dto.track.TrackShortResp;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +19,5 @@ public class GetArtistResp {
 
     private Set<TrackShortResp> tracks = new HashSet<>();
 
-    @JsonProperty(value = "subscriber_count")
-    private Integer subAmount;
 
 }

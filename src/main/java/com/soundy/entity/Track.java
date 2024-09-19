@@ -16,17 +16,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@Entity(name = "track")
-@Table
+@Entity
+@Table(name = "track")
 @NoArgsConstructor
-
 @EqualsAndHashCode(exclude = {"artists"})
 @ToString
 public class Track {

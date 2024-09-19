@@ -25,7 +25,6 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "playlist")
-
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
@@ -60,8 +59,5 @@ public class Playlist {
     @EqualsAndHashCode.Exclude
     private Set<Track> tracks = new HashSet<>();
 
-
-//    @Formula("(select count(public.playlist2user.user_id) from playlist2user where playlist2user.playlist_id.id)")
-//    private Integer listeners = 0;
 
 }

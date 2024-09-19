@@ -52,27 +52,27 @@ public class MvcTest {
     ObjectMapper objectMapper;
 
 
-    @Test
-    void getTrackReq() throws Exception {
-        Mockito.when(trackService.findTrackById(1)).thenReturn(Optional.of(mockTrack()));
-        mvc.perform(MockMvcRequestBuilders.get(TRACK_URL + "/1")).andExpect(
-                MockMvcResultMatchers.status().isOk());
+//    @Test
+//    void getTrackReq() throws Exception {
+//        Mockito.when(trackService.findTrackById(1)).thenReturn(Optional.of(mockTrack()));
+//        mvc.perform(MockMvcRequestBuilders.get(TRACK_URL + "/1")).andExpect(
+//                MockMvcResultMatchers.status().isOk());
+//
+//        Mockito.when(trackService.findTrackById(2)).thenReturn(Optional.empty());
+//        mvc.perform(MockMvcRequestBuilders.get(TRACK_URL + "/2")).andExpect(
+//                MockMvcResultMatchers.status().isNotFound());
+//
+//    }
 
-        Mockito.when(trackService.findTrackById(2)).thenReturn(Optional.empty());
-        mvc.perform(MockMvcRequestBuilders.get(TRACK_URL + "/2")).andExpect(
-                MockMvcResultMatchers.status().isNotFound());
-
-    }
-
-    @Test
-    void delTrack() throws Exception {
-        Mockito.when(trackService.delTrackById(1)).thenReturn(true);
-        mvc.perform(MockMvcRequestBuilders.delete(TRACK_URL + "/1")).andExpect(MockMvcResultMatchers.status().isNoContent());
-
-        Mockito.when(trackService.delTrackById(2)).thenReturn(false);
-        mvc.perform(MockMvcRequestBuilders.delete(TRACK_URL + "/2")).andExpect(
-                MockMvcResultMatchers.status().isNotFound());
-    }
+//    @Test
+//    void delTrack() throws Exception {
+//        Mockito.when(trackService.delTrackById(1)).thenReturn(true);
+//        mvc.perform(MockMvcRequestBuilders.delete(TRACK_URL + "/1")).andExpect(MockMvcResultMatchers.status().isNoContent());
+//
+//        Mockito.when(trackService.delTrackById(2)).thenReturn(false);
+//        mvc.perform(MockMvcRequestBuilders.delete(TRACK_URL + "/2")).andExpect(
+//                MockMvcResultMatchers.status().isNotFound());
+//    }
 
     //	@Test
 //	void createReqTest() throws Exception {

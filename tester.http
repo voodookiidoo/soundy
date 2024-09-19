@@ -1,0 +1,49 @@
+GET http://localhost:4840/soundy/load
+
+###
+
+POST http://localhost:4840/soundy/usr
+Content-Type: application/json
+
+{
+  "username": "usder"
+}
+
+###
+POST http://localhost:4840/soundy/artist
+Content-Type: application/json
+
+{
+  "name": "tomas",
+  "desc": "this is tomas"
+}
+###
+POST http://localhost:4840/soundy/track
+Content-Type: application/json
+
+{
+  "title": "piskins",
+  "artists": [
+    2,
+    4
+  ],
+  "explicit": false,
+  "premium": false
+}
+
+###
+###
+GET http://localhost:4840/soundy/artist
+Content-Type: application/json
+
+{
+  "id": 7
+}
+
+###
+
+pwwdgrmsdqgjqhsw
+kabdzlckeerstfoe
+blessed#BY#50
+
+###

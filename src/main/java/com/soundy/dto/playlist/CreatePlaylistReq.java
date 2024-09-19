@@ -20,6 +20,4 @@ public class CreatePlaylistReq {
 
     private Set<Integer> tracks = new HashSet<>();
 
-    private Integer ownerId;
-
 }

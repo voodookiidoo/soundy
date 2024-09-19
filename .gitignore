@@ -3,7 +3,8 @@
 .idea
 .gitignore
 HELP.md
-
+notes.md
+lombok.config
 .DS_STORE
 target
 # Log file

@@ -2,13 +2,12 @@ package com.soundy.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,17 +24,25 @@ import java.util.Set;
 public class AppUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "permium", nullable = false)
-    private Boolean permium = false;
+
+
+    @OneToOne
+    @JoinTable(
+            name = "account",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id")
+    )
+    private Account account;
+
+
+    @Column(name = "premium", nullable = false)
+    private Boolean premium = false;
 
     @Column(name = "explicit", nullable = false)
     private Boolean explicit = false;
 
-    @Column(name = "username", nullable = false)
-    private String username;
 
     @ManyToMany
     @JoinTable(name = "user2artist",

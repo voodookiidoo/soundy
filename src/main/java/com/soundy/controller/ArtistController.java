@@ -5,6 +5,7 @@ import com.soundy.dto.artist.GetArtistReq;
 import com.soundy.dto.artist.GetArtistResp;
 import com.soundy.mapper.SoundyMapper;
 import com.soundy.service.ArtistService;
+import jakarta.annotation.security.RolesAllowed;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
 
+import static com.soundy.config.Constants.ADMIN_ROLE;
+import static com.soundy.config.Constants.ARTIST_ROLE;
+import static com.soundy.config.Constants.USER_ROLE;
+
 @Slf4j
 @AllArgsConstructor
 @Controller
@@ -24,20 +29,17 @@ public class ArtistController {
     private ArtistService artistService;
 
     @GetMapping("/artist")
-    public ResponseEntity<?> getArtist(@RequestBody GetArtistReq req) {
+    @RolesAllowed({ARTIST_ROLE, USER_ROLE})
+    public ResponseEntity<?> findArtist(@RequestBody GetArtistReq req) {
         Optional<GetArtistResp> opt = artistService.findArtistById(req)
                 .map(SoundyMapper.INSTANCE::toArtistResp);
         return ResponseEntity.of(opt);
 
     }
 
-    @PostMapping("/artist")
-    public ResponseEntity<?> createArtist(@RequestBody AddArtistReq req) {
-        artistService.createArtist(req);
-        return ResponseEntity.noContent().build();
-    }
 
     @GetMapping("/load")
+    @RolesAllowed(ADMIN_ROLE)
     public ResponseEntity<?> loadDbFromFile() {
         return artistService.fillDbFromFile() ? ResponseEntity.noContent().build() : ResponseEntity.internalServerError().build();
     }

@@ -1,7 +1,9 @@
 package com.soundy.controller;
 
+import com.soundy.dto.exception.OwnerInvalidException;
 import com.soundy.dto.track.PublishTrackReq;
 import com.soundy.service.TrackService;
+import jakarta.annotation.security.RolesAllowed;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -13,34 +15,43 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
+import static com.soundy.config.Constants.ARTIST_ROLE;
+import static com.soundy.config.Constants.TRACK_URL;
+import static com.soundy.config.Constants.USER_ROLE;
+
 @Slf4j
 @AllArgsConstructor
-@Controller()
-@RequestMapping("/soundy/tracks")
+@Controller
+@RequestMapping(TRACK_URL)
 public class TrackController {
 
     private TrackService trackService;
 
 
-    @PostMapping("")
-    public ResponseEntity<?> publishTrack(@RequestBody PublishTrackReq req) {
-        trackService.publishTrack(req);
-        return ResponseEntity.noContent().build();
+    @PostMapping
+    @RolesAllowed({ARTIST_ROLE})
+    public ResponseEntity<?> publishTrack(@RequestBody PublishTrackReq req, Principal principal) {
+        return (trackService.publishTrack(req, principal)) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("")
+    @GetMapping
+    @RolesAllowed({USER_ROLE, ARTIST_ROLE})
     public ResponseEntity<?> indexTracks() {
         return ResponseEntity.ok(trackService.findAll());
     }
 
     @GetMapping("/{id}")
+    @RolesAllowed({USER_ROLE, ARTIST_ROLE})
     public ResponseEntity<?> findTrack(@PathVariable Integer id) {
         return ResponseEntity.of(trackService.findTrackById(id));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteTrack(@PathVariable Integer id) {
-        return trackService.delTrackById(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    @DeleteMapping("/{trackId}")
+    @RolesAllowed(ARTIST_ROLE)
+    public ResponseEntity<?> deleteTrack(@PathVariable Integer trackId, Principal principal) throws OwnerInvalidException {
+        return trackService.delTrackById(trackId, principal) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
 }

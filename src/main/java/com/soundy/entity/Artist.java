@@ -4,37 +4,40 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@Entity(name = "artist")
-@Table
+@Entity
+@Table(name = "artist")
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"tracks"})
-
 @ToString
 public class Artist {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @OneToOne()
+    @JoinTable(
+            name = "account",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id")
+    )
+    private Account account;
 
     @Column(name = "description", length = Integer.MAX_VALUE)
     private String description;
@@ -43,9 +46,6 @@ public class Artist {
     @ToString.Exclude
     private Set<Track> tracks = new HashSet<>();
 
-
-//    @Formula("(select count(user2artist.user_id) from user2artist where user2artist.artist_id = id)")
-//    private Integer subAmount;
 
 
 }

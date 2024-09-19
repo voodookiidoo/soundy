@@ -1,10 +1,9 @@
 package com.soundy.dto.track;
 
-import com.soundy.dto.artist.ShortArtistResp;
+import com.soundy.dto.artist.ArtistShortResp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -25,6 +24,6 @@ public class TrackResp {
 
     private Boolean premium;
 
-    private Set<ShortArtistResp> artists = new HashSet<>();
+    private Set<ArtistShortResp> artists = new HashSet<>();
 
 }
