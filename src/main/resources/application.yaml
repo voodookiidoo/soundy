@@ -10,9 +10,26 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+  flyway:
+    user: postgres
+    password:
+    locations: classpath:db/migration/postgres/public
+
 server:
   port: 4840
 logging:
   pattern:
     dateformat:
       HH:mm:ss
+  level:
+    sql: debug
+    web: debug
+springfox:
+  documentation:
+    swagger:
+      v2:
+        enabled: true
+#    swagger-ui:
+#      base-url: /doc.html
+springdoc:
+  enable-spring-security: false

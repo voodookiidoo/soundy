@@ -3,43 +3,30 @@ package com.soundy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soundy.dto.track.TrackResp;
 import com.soundy.service.ArtistService;
+import com.soundy.service.AuthService;
 import com.soundy.service.PlaylistService;
 import com.soundy.service.TrackService;
-import com.soundy.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.util.Optional;
 
 @Slf4j
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MvcTest {
 
-    private static final String TRACK_URL = "/soundy/tracks";
-
-    private static final String PLAYLIST_URL = "/soundy/playlist";
-
-    private static final String ARTIST_URL = "/soundy/artist";
-
-    private static final String USER_URL = "/soundy/user";
-
-    @MockBean
-    TrackService trackService;
-
     @Autowired
     MockMvc mvc;
 
     @MockBean
-    UserService userService;
+    TrackService trackService;
+
+
+    @MockBean
+    AuthService authService;
 
 
     @MockBean

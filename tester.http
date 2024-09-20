@@ -1,49 +1,41 @@
-GET http://localhost:4840/soundy/load
-
 ###
-
-POST http://localhost:4840/soundy/usr
+POST http://localhost:4840/soundy/auth/register
 Content-Type: application/json
 
 {
-  "username": "usder"
+  "username": "a",
+  "password": "a",
+  "role": "ROLE_ADMIN"
 }
 
 ###
-POST http://localhost:4840/soundy/artist
-Content-Type: application/json
-
-{
-  "name": "tomas",
-  "desc": "this is tomas"
-}
 ###
-POST http://localhost:4840/soundy/track
+GET http://localhost:4840/soundy/auth/gentoken
 Content-Type: application/json
 
 {
-  "title": "piskins",
-  "artists": [
-    2,
-    4
-  ],
+  "username": "artist",
+  "password": "artist"
+}
+
+###
+###
+GET http://localhost:4840/soundy/artist/5
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcnQiLCJpYXQiOjE3MjY3NzEyMzd9.vZQaHJnveY3C94JcUN3opQ4CfgWOUEThipUw6uWn3CE
+###
+###
+GET http://localhost:4840/soundy/artist/
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcnQiLCJpYXQiOjE3MjY3NzEyMzd9.vZQaHJnveY3C94JcUN3opQ4CfgWOUEThipUw6uWn3CE
+
+
+###
+POST http://localhost:4840/soundy/tracks/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcnQiLCJpYXQiOjE3MjY3NzEzNzJ9.5hMrX00bAw8svThBfTBk0nPw0jnn181kLhoRym0rcnM
+
+{
+  "title": "Who was in paris",
   "explicit": false,
-  "premium": false
+  "premium": false,
+  "artists": []
 }
-
-###
-###
-GET http://localhost:4840/soundy/artist
-Content-Type: application/json
-
-{
-  "id": 7
-}
-
-###
-
-pwwdgrmsdqgjqhsw
-kabdzlckeerstfoe
-blessed#BY#50
-
-###

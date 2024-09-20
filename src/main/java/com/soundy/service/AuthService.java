@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.CredentialException;
+import java.util.Objects;
+
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -30,11 +33,13 @@ public class AuthService implements UserDetailsService {
     AdminRepository adminRepository;
 
 
-    public boolean checkUser(String username, String pwd) {
-        var acc = accountRepository.findByUsername(username);
-        return acc.map(account -> {
-            return account.getPassword().equals(pwd);
-        }).orElse(false);
+    public Account findAndCheckUser(String username, String pwd) throws CredentialException {
+        var acc = accountRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
+        if (!Objects.equals(acc.getPassword(), pwd)){
+            return acc;
+        }else {
+            throw new CredentialException("Password is invalid for user!");
+        }
 
     }
 
@@ -53,7 +58,7 @@ public class AuthService implements UserDetailsService {
                 appUserRepository.save(user);
             }
             case ROLE_ARTIST -> {
-                var artist = artistRepository.save(new Artist());
+                var artist = new Artist().setId(savedId);
                 artistRepository.save(artist);
             }
         }
@@ -69,5 +74,13 @@ public class AuthService implements UserDetailsService {
 
     }
 
+
+    public void delUserByName(String username) {
+        var acc = accountRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username \"%s\" is not in database".formatted(username)));
+
+
+    }
 
 }

@@ -1,6 +1,5 @@
 package com.soundy.service;
 
-import com.soundy.dto.artist.GetArtistReq;
 import com.soundy.entity.Account;
 import com.soundy.entity.Artist;
 import com.soundy.entity.Track;
@@ -42,8 +41,8 @@ public class ArtistService {
     }
 
 
-    public Optional<Artist> findArtistById(GetArtistReq req) {
-        return artistRepository.findById(req.getId());
+    public Optional<Artist> findArtistById(Integer id) {
+        return artistRepository.findById(id);
     }
 
 

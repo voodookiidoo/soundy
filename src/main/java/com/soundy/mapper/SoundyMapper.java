@@ -49,6 +49,7 @@ public interface SoundyMapper {
     @Mapping(target = "title", source = "name")
     @Mapping(target = "owner", ignore = true)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "tracks", ignore = true)
     Playlist toPlaylist(CreatePlaylistReq req);
 
 }
