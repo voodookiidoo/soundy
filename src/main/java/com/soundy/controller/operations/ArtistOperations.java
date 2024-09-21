@@ -26,7 +26,7 @@ public interface ArtistOperations {
     @Operation(summary = "Заполнение бд",
             description = "Метод извлекат данные из csv ресурса, после чего заполняет бд данными")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Заполнение успешно")})
+            @ApiResponse(responseCode = "204", description = "Заполнение успешно")})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping("/load")
 //    @RolesAllowed(ADMIN_ROLE)

@@ -36,7 +36,7 @@ public interface TrackOperations {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Выполнено успешно")})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PostMapping
+    @PostMapping("/publish")
 //    @RolesAllowed({ARTIST_ROLE})
     ResponseEntity<?> publishTrack(@RequestBody PublishTrackReq req, Principal principal);
 
@@ -44,7 +44,7 @@ public interface TrackOperations {
     @ApiResponse(responseCode = "200", description = "Выполнено успешно", content = @Content(array = @ArraySchema(arraySchema =
     @Schema(implementation = List.class),
             schema = @Schema(implementation = TrackResp.class))))
-    @GetMapping
+    @GetMapping("/index")
 //    @RolesAllowed({USER_ROLE, ARTIST_ROLE})
     ResponseEntity<?> indexTracks();
 

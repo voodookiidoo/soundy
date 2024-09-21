@@ -56,7 +56,7 @@ public interface PlaylistOperations {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "202", description = "Выполнено успешно")})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PostMapping
+    @PostMapping("/pub")
 //    @RolesAllowed(USER_ROLE)
     ResponseEntity<?> createPlaylist(@RequestBody CreatePlaylistReq req, Principal principal);
 
@@ -65,7 +65,7 @@ public interface PlaylistOperations {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Выполнено успешно")})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping
+    @PatchMapping("/upd")
 //    @RolesAllowed(USER_ROLE)
     ResponseEntity<?> updatePlaylist(@RequestBody PlaylistUpdateReq req, Principal principal) throws OwnerInvalidException, PlaylistNotFoundException;
 

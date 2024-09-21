@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    container_name: psql_serv
+    image: postgres:14
+    ports:
+      - "5432:2324"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: psql
+      POSTGRES_DATABASE: postgres
+      POSTGRES_PASSWORD: ""
+      POSTGRES_PORT: 2324
+  spring_app:
+    build:
+      context: .
+    container_name: soundy_app
+    depends_on:
+      - db
+    environment:
+      POSTGRES_USER: psql
+      POSTGRES_DATABASE: postgres
+      POSTGRES_PASSWORD:
