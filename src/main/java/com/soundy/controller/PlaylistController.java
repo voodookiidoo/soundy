@@ -9,11 +9,17 @@ import com.soundy.service.PlaylistService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
+import static com.soundy.config.Constants.PLAYLIST_URL;
+
 @Slf4j
 @AllArgsConstructor
+@RestController
+@RequestMapping(PLAYLIST_URL)
 public class PlaylistController implements PlaylistOperations {
 
     private PlaylistService playlistService;

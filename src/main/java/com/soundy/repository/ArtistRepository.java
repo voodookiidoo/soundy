@@ -1,6 +1,7 @@
 package com.soundy.repository;
 
 import com.soundy.entity.Artist;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.NonNull;
@@ -19,5 +20,8 @@ public interface ArtistRepository extends JpaRepository<Artist, Integer> {
     @Query("select a from Artist a where a.account.username = ?1")
     @NonNull
     Optional<Artist> findByUsername(String username);
+
+    @Override
+    void deleteById(@NonNull  Integer integer);
 
 }

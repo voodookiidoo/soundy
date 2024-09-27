@@ -7,44 +7,51 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import lombok.experimental.Accessors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-@Entity
-@Table(name = "account")
+@NoArgsConstructor
 @Getter
 @Setter
-@ToString
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Accessors(chain = true)
+@Entity
+@Table(name = "account")
 public class Account implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(unique = true, nullable = false)
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, updatable = false, name = "account_role")
+    @NotNull
+    @Column(name = "account_role", nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private Role accountRole;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(accountRole);
+        return List.of();
     }
 
     public enum Role implements GrantedAuthority {

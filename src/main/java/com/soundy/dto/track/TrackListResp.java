@@ -3,15 +3,14 @@ package com.soundy.dto.track;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
-
-public class GetTrackListResp {
+public class TrackListResp {
 
     private Set<TrackShortResp> tracks;
+
 }

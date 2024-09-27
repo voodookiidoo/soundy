@@ -17,18 +17,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.util.List;
-
-import static com.soundy.config.Constants.TRACK_URL;
+import java.util.Optional;
 
 @Tag(name = "Операции с треками")
-@RequestMapping(TRACK_URL)
-@RestController
 public interface TrackOperations {
 
     @Operation(summary = "Публикация трека",
@@ -40,25 +36,40 @@ public interface TrackOperations {
 //    @RolesAllowed({ARTIST_ROLE})
     ResponseEntity<?> publishTrack(@RequestBody PublishTrackReq req, Principal principal);
 
-    @Operation(summary = "Получение списка треков")
+    @Operation(summary = "Получение списка треков", description = "Возвращает список всех треков, предварительно фильтруя их" +
+            "основываясь на свойствах аккаунта и проводя фильтрацию")
     @ApiResponse(responseCode = "200", description = "Выполнено успешно", content = @Content(array = @ArraySchema(arraySchema =
     @Schema(implementation = List.class),
             schema = @Schema(implementation = TrackResp.class))))
     @GetMapping("/index")
 //    @RolesAllowed({USER_ROLE, ARTIST_ROLE})
-    ResponseEntity<?> indexTracks();
+    ResponseEntity<?> indexTracks(Principal principal);
 
     @Operation(summary = "Поиск трека", description = "Выполняет поиск трека в базе по id из пути")
     @ApiResponse(responseCode = "200", description = "Выполнено успешно", content = @Content(schema = @Schema(implementation = TrackResp.class)))
     @GetMapping("/{id}")
 //    @RolesAllowed({USER_ROLE, ARTIST_ROLE})
-    ResponseEntity<?> findTrack(@PathVariable Integer id);
+    ResponseEntity<?> findTrack(@PathVariable Integer id, Principal principal);
 
     @Operation(summary = "Удаление трека", description = "Удаляет трек из базы если пользователь числится среди владельцев")
     @ApiResponse(responseCode = "204", description = "Выполнено успешно")
     @DeleteMapping("/{trackId}")
 //    @RolesAllowed(ARTIST_ROLE)
     ResponseEntity<?> deleteTrack(@PathVariable Integer trackId, Principal principal) throws OwnerInvalidException;
+
+    @Operation(summary = "Получить самые популярные треки", description = "Возвращает из базы n самых популярных треков. " +
+            "В качестве метрики популярности используется количество плейлистов с заданным треком")
+    @ApiResponse(responseCode = "200", description = "Выполнено успешно", content = @Content(array = @ArraySchema(arraySchema =
+    @Schema(implementation = List.class),
+            schema = @Schema(implementation = TrackResp.class))))
+    @GetMapping("/top")
+    ResponseEntity<?> topNTracks(@RequestParam(required = false, name = "n") Optional<Integer> count);
+
+
+    ResponseEntity<?> freshNTracks(@RequestParam(required = false, name = "n") Optional<Integer> count);
+
+
+    ResponseEntity<?> otherTracksWithArtists(Integer id);
 
 
 }

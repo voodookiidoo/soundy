@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -31,6 +32,8 @@ public class TrackService {
     private TrackRepository trackRepository;
 
     private ArtistRepository artistRepository;
+
+
 
     public boolean delTrackById(Integer id, Principal principal) throws OwnerInvalidException {
         var optTrack = trackRepository.findById(id);
@@ -49,7 +52,7 @@ public class TrackService {
     public boolean publishTrack(PublishTrackReq req, Principal principal) {
         List<Artist> artists = artistRepository.findAllById(req.getArtists());
         var optArtist = artistRepository.findByUsername(principal.getName());
-        if (optArtist.isEmpty()){
+        if (optArtist.isEmpty()) {
             return false;
         }
         Track track = SoundyMapper.INSTANCE.toTrack(req);
@@ -64,8 +67,25 @@ public class TrackService {
         return trackRepository.findAll().stream().map(SoundyMapper.INSTANCE::toShortTrackResp).toList();
     }
 
+    public List<TrackShortResp> findAllFiltered(boolean explicit, boolean premium) {
+        return trackRepository.findByExplicitAndPremium(explicit, premium).stream().map(SoundyMapper.INSTANCE::toShortTrackResp).toList();
+    }
+
     public Optional<TrackResp> findTrackById(Integer id) {
         return trackRepository.findById(id).map(SoundyMapper.INSTANCE::toTrackResp);
+    }
+
+    public List<TrackResp> topTracks(Integer count) {
+        return trackRepository.getTopN(count).stream().map(SoundyMapper.INSTANCE::toTrackResp).toList();
+
+    }
+
+    public List<TrackResp> freshTracks(Integer n) {
+        return trackRepository.getFreshN(n).stream().map(SoundyMapper.INSTANCE::toTrackResp).toList();
+    }
+
+    public List<TrackResp> findOthersWithArtists(Integer id) {
+        return trackRepository.findOtherWithArtists(id).stream().map(SoundyMapper.INSTANCE::toTrackResp).toList();
     }
 
 }

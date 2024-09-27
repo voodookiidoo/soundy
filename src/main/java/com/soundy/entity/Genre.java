@@ -5,16 +5,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.Formula;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -25,8 +24,9 @@ import java.util.Set;
 @Setter
 @Accessors(chain = true)
 @Entity
-@Table(name = "playlist")
-public class Playlist {
+@Table(name = "genre")
+@ToString
+public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,20 +34,14 @@ public class Playlist {
     private Integer id;
 
     @Size(max = 255)
-    @Column(name = "title")
-    private String title;
+    @Column(name = "genre_name")
+    private String genreName;
 
     @Column(name = "description", length = Integer.MAX_VALUE)
     private String description;
 
-    @ManyToMany
-    @JoinTable(name = "playlist2track",
-            joinColumns = @JoinColumn(name = "playlist_id"),
-            inverseJoinColumns = @JoinColumn(name = "track_id"))
+    @OneToMany(mappedBy = "genre")
+    @ToString.Exclude
     private Set<Track> tracks = new HashSet<>();
-
-
-//    @Formula("SELECT count(public.playlist2user.user_id) as total from user2artist where public.playlist2user.playlist_id = id")
-//    private Integer subscribers = 0;
 
 }

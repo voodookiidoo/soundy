@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class GetArtistResp {
+public class ArtistResp {
 
     private Integer id;
 

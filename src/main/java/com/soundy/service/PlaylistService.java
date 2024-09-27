@@ -42,18 +42,18 @@ public class PlaylistService {
         AppUser owner = userRepository.findByUsername(principal.getName()).orElseThrow(() -> new UsernameNotFoundException(principal.getName()));
         Playlist playlist = SoundyMapper.INSTANCE.toPlaylist(req);
         Set<Track> tracks = new HashSet<>(trackRepository.findAllById(req.getTracks()));
-        playlist.setOwner(owner).setTracks(tracks);
+//        playlist.setOwner(owner).setTracks(tracks);
         playlistRepository.save(playlist);
     }
 
     public void updatePlaylist(PlaylistUpdateReq req, Principal principal) throws OwnerInvalidException, PlaylistNotFoundException {
         var playlist = playlistRepository.findById(req.getId()).orElseThrow(PlaylistNotFoundException::new);
         var user = userRepository.findByUsername(principal.getName()).orElseThrow(() -> new UsernameNotFoundException(principal.getName()));
-        if (!Objects.equals(playlist.getOwner().getId(), user.getId())) {
-            throw new OwnerInvalidException();
-        }
+//        if (!Objects.equals(playlist.getOwner().getId(), user.getId())) {
+//            throw new OwnerInvalidException();
+//        }
         Set<Track> tracks = new HashSet<>(trackRepository.findAllById(req.getTracks()));
-        playlist.setTracks(tracks).setTitle(req.getName()).setDesc(req.getDesc());
+//        playlist.setTracks(tracks).setTitle(req.getName()).setDesc(req.getDesc());
         playlistRepository.save(playlist);
 
     }
@@ -61,9 +61,9 @@ public class PlaylistService {
     public void deletePlaylistById(Integer id, Principal principal) throws OwnerInvalidException, PlaylistNotFoundException {
         var playlist = playlistRepository.findById(id).orElseThrow(PlaylistNotFoundException::new);
         var user = userRepository.findByUsername(principal.getName()).orElseThrow(() -> new UsernameNotFoundException(principal.getName()));
-        if (!Objects.equals(playlist.getOwner().getId(), user.getId())) {
-            throw new OwnerInvalidException();
-        }
+//        if (!Objects.equals(playlist.getOwner().getId(), user.getId())) {
+//            throw new OwnerInvalidException();
+//        }
         playlistRepository.deleteById(id);
     }
 

@@ -3,9 +3,18 @@ POST http://localhost:4840/soundy/auth/register
 Content-Type: application/json
 
 {
-  "username": "a",
-  "password": "a",
+  "username": "admin",
+  "password": "admin",
   "role": "ROLE_ADMIN"
+}
+###
+POST http://localhost:4840/soundy/auth/register
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "user",
+  "role": "ROLE_USER"
 }
 
 ###
@@ -14,14 +23,14 @@ GET http://localhost:4840/soundy/auth/gentoken
 Content-Type: application/json
 
 {
-  "username": "artist",
-  "password": "artist"
+  "username": "user",
+  "password": "user"
 }
 
 ###
 ###
-GET http://localhost:4840/soundy/artist/5
-#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcnQiLCJpYXQiOjE3MjY3NzEyMzd9.vZQaHJnveY3C94JcUN3opQ4CfgWOUEThipUw6uWn3CE
+GET http://localhost:4840/soundy/tracks/top?n=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjkzLCJzdWIiOiJ1c2VyIiwiaWF0IjoxNzI3Mzg1OTA2LCJleHAiOjE3Mjc1Mjk5MDZ9.EojD3sM0mDz97Gzt2BUeflbl0okcIb6tBUdGIzKJ12A
 ###
 ###
 GET http://localhost:4840/soundy/artist/

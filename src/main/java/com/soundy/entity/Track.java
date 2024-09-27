@@ -1,34 +1,38 @@
 package com.soundy.entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+@NoArgsConstructor
 @Getter
 @Setter
+@Accessors(chain = true)
 @Entity
 @Table(name = "track")
-@NoArgsConstructor
-@EqualsAndHashCode(exclude = {"artists"})
 @ToString
 public class Track {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,21 +42,24 @@ public class Track {
     @Column(name = "title", length = Integer.MAX_VALUE)
     private String title;
 
-    @Column(name = "explicit")
-    private Boolean explicit = true;
+    @Column(name = "explicit", nullable = false)
+    private Boolean explicit = false;
 
-    @Column(name = "premium")
+    @Column(name = "premium", nullable = false)
     private Boolean premium = false;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
-    @JoinTable(
-            name = "artist2track", // Название промежуточной таблицы
-            joinColumns = @JoinColumn(name = "track_id"), // Связь с таблицей track
-            inverseJoinColumns = @JoinColumn(name = "artist_id") // Связь с таблицей artist
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "genre_id")
+    @ToString.Exclude
+    private Genre genre;
+
+    @NotNull
+    @Column(name = "publish_date", nullable = false)
+    private LocalDate publishDate = LocalDate.now();
+
+    @ManyToMany(mappedBy = "tracks", fetch = FetchType.EAGER)
     @ToString.Exclude
     @Size(min = 1)
     private Set<Artist> artists = new HashSet<>();
-
 
 }

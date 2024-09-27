@@ -1,6 +1,5 @@
 package com.soundy.controller.operations;
 
-import com.soundy.config.Constants;
 import com.soundy.dto.user.DelAccountReq;
 import com.soundy.dto.user.UserGenTokenReq;
 import com.soundy.dto.user.UserRegisterReq;
@@ -16,16 +15,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.security.auth.login.CredentialException;
 
 
-@RequestMapping(Constants.AUTH_URL)
 @Tag(name = "Операции с пользователями")
-@RestController
 public interface AuthOperations {
 
     @Operation(summary = "Регистрация пользователя в приложении",
